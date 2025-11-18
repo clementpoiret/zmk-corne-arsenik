@@ -107,88 +107,89 @@
    &kp TAB   &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P           &kp BSPC
    &kp ESC   &hrm LGUI A &hrm LALT S &hrm LSHFT D &hrm LCTRL F &kp G   &kp H &hrm RCTRL J &hrm RSHFT K &hrm RALT L &hrm RCTRL SEMI &kp ENTER
    &kp LSHFT &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH        &kp RSFT
-                             &tkl MO(3) ESC &kp SPACE &tkl MO(6) TAB   &tkl MO(4) RET &kp BACKSPACE &kp RALT
+                             &kp ESC &kp SPACE &kp TAB   &kp RET &kp BACKSPACE &kp RALT
+                             // &tkl MO(3) ESC &kp SPACE &tkl MO(6) TAB   &tkl MO(4) RET &kp BACKSPACE &kp RALT
                         >;
                 };
 
-                lafayette_layer {
-// -----------------------------------------------------------------------------------------
-// |     |  ^  |  <  |  >  |  $  |  %  |   |  @  |  &  |  *  |  '  |  `  |      |
-// |     |  {  |  (  |  )  |  }  |  =  |   |  \  |  +  |  -  |  /  |  "  |      |
-// |     |  ~  |  [  |  ]  |  _  |  #  |   |  |  |  !  |  ;  |  :  |  ?  |      |
-//                   | NUM | SPC |     |   |     | SPC | NUM |
-                        bindings = <
-   &trans  &kp CARET &kp LT   &kp GT   &kp DLLR &kp PRCNT   &kp AT   &kp AMPS  &kp ASTERISK &kp SQT  &kp GRAVE &trans
-   &trans  &kp LBRC  &kp LPAR &kp RPAR &kp RBRC &kp EQUAL   &kp BSLH &kp PLUS  &kp MINUS    &kp FSLH &kp DQT   &trans
-   &trans  &kp TILDE &kp LBKT &kp RBKT &kp UNDER &kp HASH   &kp PIPE &kp EXCL  &kp SEMI     &kp COLON &kp QUES &trans
-                                    &mo 2 &kp SPACE &none   &none &kp SPACE &mo 2
-                        >;
-                };
+//                 lafayette_layer {
+// // -----------------------------------------------------------------------------------------
+// // |     |  ^  |  <  |  >  |  $  |  %  |   |  @  |  &  |  *  |  '  |  `  |      |
+// // |     |  {  |  (  |  )  |  }  |  =  |   |  \  |  +  |  -  |  /  |  "  |      |
+// // |     |  ~  |  [  |  ]  |  _  |  #  |   |  |  |  !  |  ;  |  :  |  ?  |      |
+// //                   | NUM | SPC |     |   |     | SPC | NUM |
+//                         bindings = <
+//    &trans  &kp CARET &kp LT   &kp GT   &kp DLLR &kp PRCNT   &kp AT   &kp AMPS  &kp ASTERISK &kp SQT  &kp GRAVE &trans
+//    &trans  &kp LBRC  &kp LPAR &kp RPAR &kp RBRC &kp EQUAL   &kp BSLH &kp PLUS  &kp MINUS    &kp FSLH &kp DQT   &trans
+//    &trans  &kp TILDE &kp LBKT &kp RBKT &kp UNDER &kp HASH   &kp PIPE &kp EXCL  &kp SEMI     &kp COLON &kp QUES &trans
+//                                     &mo 2 &kp SPACE &none   &none &kp SPACE &mo 2
+//                         >;
+//                 };
 
-                num_row_layer {
-// -----------------------------------------------------------------------------------------
-// |     |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |      |
-// |     |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
-// |     | O1  | O2  | O3  | O4  | O5  |   |     |  -  |  ,  |  .  |  /  |      |
-//                   | LAF | SPC |     |   |     | SPC | LAF |
-                        bindings = <
-   &trans  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTERISK &kp LPAR &kp RPAR &trans
-   &trans  &kp N1   &kp N2 &kp N3   &kp N4   &kp N5      &kp N6    &kp N7    &kp N8       &kp N9   &kp N0   &trans
-   &trans  &odk_1   &odk_2 &odk_3   &odk_4   &odk_5      &none     &kp MINUS &kp COMMA    &kp DOT  &kp FSLH &trans
-                                 &mo 1 &kp SPACE &none   &none &kp SPACE &mo 1
-                        >;
-                };
+//                 num_row_layer {
+// // -----------------------------------------------------------------------------------------
+// // |     |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |      |
+// // |     |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
+// // |     | O1  | O2  | O3  | O4  | O5  |   |     |  -  |  ,  |  .  |  /  |      |
+// //                   | LAF | SPC |     |   |     | SPC | LAF |
+//                         bindings = <
+//    &trans  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTERISK &kp LPAR &kp RPAR &trans
+//    &trans  &kp N1   &kp N2 &kp N3   &kp N4   &kp N5      &kp N6    &kp N7    &kp N8       &kp N9   &kp N0   &trans
+//    &trans  &odk_1   &odk_2 &odk_3   &odk_4   &odk_5      &none     &kp MINUS &kp COMMA    &kp DOT  &kp FSLH &trans
+//                                  &mo 1 &kp SPACE &none   &none &kp SPACE &mo 1
+//                         >;
+//                 };
 
-                vim_nav_layer {
-// -----------------------------------------------------------------------------------------
-// |     | NUMN|  C-T | BAK | FWD |     |   | HOME | PGDN | PGUP | END  |  G-P |      |
-// |     |  C-A|  C-S | S-TAB| TAB|     |   | LEFT | DOWN |  UP  | RIGHT| FUN  |      |
-// |     |  C-Z|  C-X | C-C | C-V |     |   | WHL← | WHL↓ | WHL↑ | WHL→ |      |      |
-//                             | DEL |     |     |     |     | ESC |
-                        bindings = <
-   &trans &mo 4     &kp LC(T) &kp C_AC_BACK &kp C_AC_FORWARD &none   &kp HOME       &kp PG_DN      &kp PG_UP    &kp END         &kp LG(P) &trans
-   &trans &kp LC(A) &kp LC(S) &kp LS(TAB)   &kp TAB          &none   &kp LEFT       &kp DOWN       &kp UP       &kp RIGHT       &mo 5     &trans
-   &trans &kp LC(Z) &kp LC(X) &kp LC(C)     &kp LC(V)        &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none     &trans
-                                              &kp DEL &trans &none   &none &trans &kp ESC
-                        >;
-                };
+//                 vim_nav_layer {
+// // -----------------------------------------------------------------------------------------
+// // |     | NUMN|  C-T | BAK | FWD |     |   | HOME | PGDN | PGUP | END  |  G-P |      |
+// // |     |  C-A|  C-S | S-TAB| TAB|     |   | LEFT | DOWN |  UP  | RIGHT| FUN  |      |
+// // |     |  C-Z|  C-X | C-C | C-V |     |   | WHL← | WHL↓ | WHL↑ | WHL→ |      |      |
+// //                             | DEL |     |     |     |     | ESC |
+//                         bindings = <
+//    &trans &mo 4     &kp LC(T) &kp C_AC_BACK &kp C_AC_FORWARD &none   &kp HOME       &kp PG_DN      &kp PG_UP    &kp END         &kp LG(P) &trans
+//    &trans &kp LC(A) &kp LC(S) &kp LS(TAB)   &kp TAB          &none   &kp LEFT       &kp DOWN       &kp UP       &kp RIGHT       &mo 5     &trans
+//    &trans &kp LC(Z) &kp LC(X) &kp LC(C)     &kp LC(V)        &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none     &trans
+//                                               &kp DEL &trans &none   &none &trans &kp ESC
+//                         >;
+//                 };
 
-                num_nav_layer {
-// -----------------------------------------------------------------------------------------
-// |     | TAB | HOME |  UP | END | PGUP |   |  /  |  7  |  8  |  9  |  G-P |      |
-// |     | C-A | LEFT | DOWN| RGHT| PGDN |   |  -  |  4  |  5  |  6  |  0  |      |
-// |     | C-Z |  C-X |  C-C|  C-V| S-TAB|   |  ,  |  1  |  2  |  3  |  .  |      |
-//                             | DEL |     |     |     |     | ESC |
-                        bindings = <
-   &trans  &kp TAB   &kp HOME &kp UP    &kp END  &kp PG_UP   &kp FSLH  &kp N7   &kp N8  &kp N9  &kp LG(P) &trans
-   &trans  &kp LC(A) &kp LEFT &kp DOWN  &kp RIGHT&kp PG_DN   &kp MINUS &kp N4   &kp N5  &kp N6  &kp N0    &trans
-   &trans  &kp LC(Z) &kp LC(X)&kp LC(C) &kp LC(V)&kp LS(TAB) &kp COMMA &kp N1   &kp N2  &kp N3  &kp DOT   &trans
-                                        &kp DEL  &trans   &none  &none  &trans  &kp ESC
-                        >;
-                };
+//                 num_nav_layer {
+// // -----------------------------------------------------------------------------------------
+// // |     | TAB | HOME |  UP | END | PGUP |   |  /  |  7  |  8  |  9  |  G-P |      |
+// // |     | C-A | LEFT | DOWN| RGHT| PGDN |   |  -  |  4  |  5  |  6  |  0  |      |
+// // |     | C-Z |  C-X |  C-C|  C-V| S-TAB|   |  ,  |  1  |  2  |  3  |  .  |      |
+// //                             | DEL |     |     |     |     | ESC |
+//                         bindings = <
+//    &trans  &kp TAB   &kp HOME &kp UP    &kp END  &kp PG_UP   &kp FSLH  &kp N7   &kp N8  &kp N9  &kp LG(P) &trans
+//    &trans  &kp LC(A) &kp LEFT &kp DOWN  &kp RIGHT&kp PG_DN   &kp MINUS &kp N4   &kp N5  &kp N6  &kp N0    &trans
+//    &trans  &kp LC(Z) &kp LC(X)&kp LC(C) &kp LC(V)&kp LS(TAB) &kp COMMA &kp N1   &kp N2  &kp N3  &kp DOT   &trans
+//                                         &kp DEL  &trans   &none  &none  &trans  &kp ESC
+//                         >;
+//                 };
 
 
-                fun_pad_layer {
-// -----------------------------------------------------------------------------------------
-// |     | F1  | F2  | F3  | F4  |     |   |     |     |     |     |     |      |
-// |     | F5  | F6  | F7  | F8  |     |   |     | LCTL| LALT| LGUI|     |      |
-// |     | F9  | F10 | F11 | F12 |     |   |     |     |     |     |     |      |
-//                    | LAF | SPC |     |   |     | SPC | LAF |
-                        bindings = <
-   &trans &kp F1  &kp F2  &kp F3  &kp F4  &none   &none &none &none &none &none &trans
-   &trans &kp F5  &kp F6  &kp F7  &kp F8  &none   &none &kp LCTRL &kp LALT &kp LGUI &trans &trans
-   &trans &kp F9  &kp F10 &kp F11 &kp F12 &none   &none &none &none &none &none &trans
-                               &mo 1 &kp SPACE &none   &none  &kp SPACE &mo 1
-                        >;
-                };
+//                 fun_pad_layer {
+// // -----------------------------------------------------------------------------------------
+// // |     | F1  | F2  | F3  | F4  |     |   |     |     |     |     |     |      |
+// // |     | F5  | F6  | F7  | F8  |     |   |     | LCTL| LALT| LGUI|     |      |
+// // |     | F9  | F10 | F11 | F12 |     |   |     |     |     |     |     |      |
+// //                    | LAF | SPC |     |   |     | SPC | LAF |
+//                         bindings = <
+//    &trans &kp F1  &kp F2  &kp F3  &kp F4  &none   &none &none &none &none &none &trans
+//    &trans &kp F5  &kp F6  &kp F7  &kp F8  &none   &none &kp LCTRL &kp LALT &kp LGUI &trans &trans
+//    &trans &kp F9  &kp F10 &kp F11 &kp F12 &none   &none &none &none &none &none &trans
+//                                &mo 1 &kp SPACE &none   &none  &kp SPACE &mo 1
+//                         >;
+//                 };
 
-                mouse_pad_layer {
-                        bindings = <
-   &trans &none &none &none &none &none   &none          &mkp LCLK      &mkp MCLK    &mkp RCLK       &none &none
-   &trans &none &none &none &none &none   &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none &none
-   &trans &none &none &none &none &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none &none
-                   &kp DEL &trans &none   &none &trans &kp ESC
-                        >;
-                };
+//                 mouse_pad_layer {
+//                         bindings = <
+//    &trans &none &none &none &none &none   &none          &mkp LCLK      &mkp MCLK    &mkp RCLK       &none &none
+//    &trans &none &none &none &none &none   &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none &none
+//    &trans &none &none &none &none &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none &none
+//                    &kp DEL &trans &none   &none &trans &kp ESC
+//                         >;
+//                 };
         };
 };
