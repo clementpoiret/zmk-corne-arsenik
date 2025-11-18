@@ -56,35 +56,6 @@
                 };
         };
 
-        // Stub macros for ODK_1..ODK_5. Replace &none with your sequences.
-        macros {
-                odk_1: odk_1 {
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        // TODO: add the actual sequence here
-                        bindings = <&none>;
-                };
-                odk_2: odk_2 {
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&none>;
-                };
-                odk_3: odk_3 {
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&none>;
-                };
-                odk_4: odk_4 {
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&none>;
-                };
-                odk_5: odk_5 {
-                        compatible = "zmk,behavior-macro";
-                        #binding-cells = <0>;
-                        bindings = <&none>;
-                };
-        };
         macros {
                 odk_1: odk_1 {
                         compatible = "zmk,behavior-macro";
