@@ -40,7 +40,7 @@
           ];
 
           board = "nice_nano_v2";
-          shield = "lily58_%PART%";
+          shield = "corne_%PART%";
 
           zephyrDepsHash = "sha256-SHiCGErcstMH9EbvbQROXIhxFEbMf3AungYu5YvqMEg=";
 
