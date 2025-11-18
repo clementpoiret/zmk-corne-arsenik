@@ -57,44 +57,10 @@
                 };
         };
 
-        macros {
-                odk_1: odk_1 {
-                        compatible = "zmk,behavior-macro";
-                        label = "ODK_1";
-                        #binding-cells = <0>;
-                        // „ (U+201E)
-                        bindings = <&uc 0x201E>;
-                };
-                odk_2: odk_2 {
-                        compatible = "zmk,behavior-macro";
-                        label = "ODK_2";
-                        #binding-cells = <0>;
-                        // “ (U+201C)
-                        bindings = <&uc 0x201C>;
-                };
-                odk_3: odk_3 {
-                        compatible = "zmk,behavior-macro";
-                        label = "ODK_3";
-                        #binding-cells = <0>;
-                        // ” (U+201D)
-                        bindings = <&uc 0x201D>;
-                };
-                odk_4: odk_4 {
-                        compatible = "zmk,behavior-macro";
-                        label = "ODK_4";
-                        #binding-cells = <0>;
-                        // ¢ (U+00A2)
-                        bindings = <&uc 0x00A2>;
-                };
-                odk_5: odk_5 {
-                        compatible = "zmk,behavior-macro";
-                        label = "ODK_5";
-                        #binding-cells = <0>;
-                        // ‰ (U+2030)
-                        bindings = <&uc 0x2030>;
-                };
+        &uc {
+                default-mode = <UC_MODE_LINUX>;
         };
-
+        
         keymap {
                 compatible = "zmk,keymap";
 
