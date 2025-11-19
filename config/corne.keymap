@@ -63,17 +63,17 @@
         keymap {
                 compatible = "zmk,keymap";
 
-                default_layer {
+        		default_layer {
 // -----------------------------------------------------------------------------------------
 // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
-// | CTRL |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |  '   |
-// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
-//                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
+// |  ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  | ENT  |
+// | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | SHFT |
+//              | NAV | SPC | MSE |   | VIM | BSP | ALT |
                         bindings = <
    &kp TAB   &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P           &kp BSPC
    &kp ESC   &hrm LGUI A &hrm LALT S &hrm LSHFT D &hrm LCTRL F &kp G   &kp H &hrm RCTRL J &hrm RSHFT K &hrm RALT L &hrm RCTRL SEMI &kp ENTER
    &kp LSHFT &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH        &kp RSFT
-                                     &tkl 3 ESC &kp SPACE &tkl 6 TAB   &tkr 4 RET &tkr 7 BACKSPACE &kp RALT
+                                     &tkl 3 ESC   &kp SPACE    &tkl 6 TAB    &tkr 4 RET   &tkr 7 BACKSPACE &kp RALT
                         >;
                 };
 
