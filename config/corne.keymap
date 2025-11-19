@@ -93,6 +93,16 @@
                         >;
                         hold-trigger-on-release;
                 };
+                // currently only for the BSP/MO(7) key, to avoid switching to BT modes
+                tks: thumb_keys_safe {
+                        compatible = "zmk,behavior-hold-tap";
+                        #binding-cells = <2>;
+                        flavor = "tap-preferred";
+                        require-prior-idle-ms = <150>;
+                        tapping-term-ms = <200>;
+                        bindings = <&mo>, <&kp>;
+                        hold-trigger-on-release;
+                };
         };
 
         keymap {
@@ -108,7 +118,7 @@
    &kp TAB   &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P           &kp BSPC
    &kp ESC   &hml LGUI A &hml LALT S &hml LSHFT D &hml LCTRL F &kp G   &kp H &hmr RCTRL J &hmr RSHFT K &hmr RALT L &hmr RCTRL SEMI &kp ENTER
    &kp LSHFT &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH        &kp RSFT
-                                     &tkl 3 ESC   &tkl 5 SPACE    &tkl 6 TAB    &tkr 4 RET   &tkr 7 BACKSPACE &kp RALT
+                                     &tkl 3 ESC   &tkl 5 SPACE    &tkl 6 TAB    &tkr 4 RET   &tks 7 BACKSPACE &kp RALT
                         >;
                 };
 
