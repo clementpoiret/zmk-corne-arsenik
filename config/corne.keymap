@@ -68,12 +68,12 @@
 // |  TAB |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  | BKSP |
 // |  ESC |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  | ENT  |
 // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | SHFT |
-//              | NAV | SPC | MSE |   | VIM | BSP | ALT |
+//                    | NAV | FUN | MSE |   | VIM | BSP  | ALT |
                         bindings = <
    &kp TAB   &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P           &kp BSPC
    &kp ESC   &hrm LGUI A &hrm LALT S &hrm LSHFT D &hrm LCTRL F &kp G   &kp H &hrm RCTRL J &hrm RSHFT K &hrm RALT L &hrm RCTRL SEMI &kp ENTER
    &kp LSHFT &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH        &kp RSFT
-                                     &tkl 3 ESC   &kp SPACE    &tkl 6 TAB    &tkr 4 RET   &tkr 7 BACKSPACE &kp RALT
+                                     &tkl 3 ESC   &tkl 5 SPACE    &tkl 6 TAB    &tkr 4 RET   &tkr 7 BACKSPACE &kp RALT
                         >;
                 };
 
@@ -135,15 +135,15 @@
 
                 fun_pad_layer {
 // -----------------------------------------------------------------------------------------
-// |     | F1  | F2  | F3  | F4  |     |   |     |     |     |     |     |      |
-// |     | F5  | F6  | F7  | F8  |     |   |     | LCTL| LALT| LGUI|     |      |
-// |     | F9  | F10 | F11 | F12 |     |   |     |     |     |     |     |      |
-//                    | LAF | SPC |     |   |     | SPC | LAF |
+// |      | F1  | F2  | F3  | F4  |     |   |     |     |     |     |     |      |
+// |      | F5  | F6  | F7  | F8  |     |   |     | CTRL| SHFT| ALT | GUI |      |
+// |      | F9  | F10 | F11 | F12 |     |   |     |     |     |     |     |      |
+//                    | SYM | SPC |     |   |     | BSP | SYM |
                         bindings = <
-   &trans &kp F1  &kp F2  &kp F3  &kp F4  &none   &none &none &none &none &none &trans
-   &trans &kp F5  &kp F6  &kp F7  &kp F8  &none   &none &kp LCTRL &kp LALT &kp LGUI &trans &trans
-   &trans &kp F9  &kp F10 &kp F11 &kp F12 &none   &none &none &none &none &none &trans
-                               &mo 1 &kp SPACE &none   &none  &kp SPACE &mo 1
+   &trans &kp F1 &kp F2  &kp F3  &kp F4  &none   &none &none      &none      &none     &none    &trans
+   &trans &kp F5 &kp F6  &kp F7  &kp F8  &none   &none &kp LCTRL  &kp LSHFT  &kp LALT  &kp LGUI &trans
+   &trans &kp F9 &kp F10 &kp F11 &kp F12 &none   &none &none      &none      &none     &none    &trans
+                         &mo 1   &kp SPACE &trans &trans &kp BACKSPACE &mo 1
                         >;
                 };
 
