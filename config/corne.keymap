@@ -136,19 +136,19 @@
 //                 };
 
 
-//                 fun_pad_layer {
-// // -----------------------------------------------------------------------------------------
-// // |     | F1  | F2  | F3  | F4  |     |   |     |     |     |     |     |      |
-// // |     | F5  | F6  | F7  | F8  |     |   |     | LCTL| LALT| LGUI|     |      |
-// // |     | F9  | F10 | F11 | F12 |     |   |     |     |     |     |     |      |
-// //                    | LAF | SPC |     |   |     | SPC | LAF |
-//                         bindings = <
-//    &trans &kp F1  &kp F2  &kp F3  &kp F4  &none   &none &none &none &none &none &trans
-//    &trans &kp F5  &kp F6  &kp F7  &kp F8  &none   &none &kp LCTRL &kp LALT &kp LGUI &trans &trans
-//    &trans &kp F9  &kp F10 &kp F11 &kp F12 &none   &none &none &none &none &none &trans
-//                                &mo 1 &kp SPACE &none   &none  &kp SPACE &mo 1
-//                         >;
-//                 };
+                fun_pad_layer {
+// -----------------------------------------------------------------------------------------
+// |     | F1  | F2  | F3  | F4  |     |   |     |     |     |     |     |      |
+// |     | F5  | F6  | F7  | F8  |     |   |     | LCTL| LALT| LGUI|     |      |
+// |     | F9  | F10 | F11 | F12 |     |   |     |     |     |     |     |      |
+//                    | LAF | SPC |     |   |     | SPC | LAF |
+                        bindings = <
+   &trans &kp F1  &kp F2  &kp F3  &kp F4  &none   &none &none &none &none &none &trans
+   &trans &kp F5  &kp F6  &kp F7  &kp F8  &none   &none &kp LCTRL &kp LALT &kp LGUI &trans &trans
+   &trans &kp F9  &kp F10 &kp F11 &kp F12 &none   &none &none &none &none &none &trans
+                               &mo 1 &kp SPACE &none   &none  &kp SPACE &mo 1
+                        >;
+                };
 
                 mouse_pad_layer {
                         bindings = <
