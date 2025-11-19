@@ -93,15 +93,15 @@
 
                 num_row_layer {
 // -----------------------------------------------------------------------------------------
-// |     |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |      |
-// |     |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
-// |     |  „  |  “  |  ”  |  ¢  |  ‰  |   |     |  -  |  ,  |  .  |  /  |      |
-//                   | LAF | SPC |     |   |     | SPC | LAF |
+// |      |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |      |
+// |      |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |      |
+// |      |  „  |  “  |  ”  |  ¢  |  ‰  |   |     |  -  |  ,  |  .  |  /  |      |
+//                    | SYM | SPC |     |   |     | BSP | SYM |
                         bindings = <
-   &trans  &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT   &kp CARET &kp AMPS  &kp ASTERISK &kp LPAR &kp RPAR &trans
-   &trans  &kp N1   &kp N2 &kp N3   &kp N4   &kp N5      &kp N6    &kp N7    &kp N8       &kp N9   &kp N0   &trans
-   &trans  &uc 0x201E 0 &uc 0x201C 0 &uc 0x201D 0 &uc 0x00A2 0 &uc 0x2030 0     &none     &kp MINUS &kp COMMA    &kp DOT  &kp FSLH &trans
-                                 &mo 1 &kp SPACE &none   &none &kp SPACE &mo 1
+   &trans &kp EXCL     &kp AT       &kp HASH     &kp DLLR     &kp PRCNT     &kp CARET &kp AMPS  &kp ASTERISK &kp LPAR  &kp RPAR &trans
+   &trans &kp N1       &kp N2       &kp N3       &kp N4       &kp N5        &kp N6    &kp N7    &kp N8       &kp N9    &kp N0   &trans
+   &trans &uc 0x201E 0 &uc 0x201C 0 &uc 0x201D 0 &uc 0x00A2 0 &uc 0x2030 0  &none     &kp MINUS &kp COMMA    &kp DOT   &kp FSLH &trans
+                                    &mo 1        &kp SPACE    &trans        &trans    &kp BACKSPACE &mo 1
                         >;
                 };
 
