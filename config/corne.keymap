@@ -73,7 +73,7 @@
    &kp TAB   &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P           &kp BSPC
    &kp ESC   &hrm LGUI A &hrm LALT S &hrm LSHFT D &hrm LCTRL F &kp G   &kp H &hrm RCTRL J &hrm RSHFT K &hrm RALT L &hrm RCTRL SEMI &kp ENTER
    &kp LSHFT &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH        &kp RSFT
-                                     &tkl 3 ESC &kp SPACE &tkl 6 TAB   &tkr 4 RET &kp BACKSPACE &kp RALT
+                                     &tkl 3 ESC &kp SPACE &tkl 6 TAB   &tkr 4 RET &tkr 7 BACKSPACE &kp RALT
                         >;
                 };
 
@@ -154,6 +154,20 @@
   &trans &none &none &none &none &none   &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none &none
   &trans &none &none &none &none &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none &none
                   &kp DEL &trans &none   &none &trans &kp ESC
+                        >;
+                };
+
+                bt_layer {
+// -----------------------------------------------------------------------------------------
+// |     | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |      |
+// |     |     |     |     |     |     |   |     | PRV | NXT |     |     |      |
+// |     | CLR | ALL |     |     |     |   |     |     |     |     |     |      |
+//                   |     |     |     |   |     |     |     |
+                        bindings = <
+   &trans  &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2   &bt BT_SEL 3 &bt BT_SEL 4    &none  &none       &none       &none  &none  &trans
+   &trans  &none        &none        &none          &none        &none           &none  &bt BT_PRV  &bt BT_NXT  &none  &none  &trans
+   &trans  &bt BT_CLR   &bt BT_CLR_ALL &none        &none        &none           &none  &none       &none       &none  &none  &trans
+                                     &trans         &trans       &trans          &trans &trans      &trans
                         >;
                 };
         };
