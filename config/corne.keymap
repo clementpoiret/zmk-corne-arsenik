@@ -121,19 +121,19 @@
 //                         >;
 //                 };
 
-//                 num_nav_layer {
-// // -----------------------------------------------------------------------------------------
-// // |     | TAB | HOME |  UP | END | PGUP |   |  /  |  7  |  8  |  9  |  G-P |      |
-// // |     | C-A | LEFT | DOWN| RGHT| PGDN |   |  -  |  4  |  5  |  6  |  0  |      |
-// // |     | C-Z |  C-X |  C-C|  C-V| S-TAB|   |  ,  |  1  |  2  |  3  |  .  |      |
-// //                             | DEL |     |     |     |     | ESC |
-//                         bindings = <
-//    &trans  &kp TAB   &kp HOME &kp UP    &kp END  &kp PG_UP   &kp FSLH  &kp N7   &kp N8  &kp N9  &kp LG(P) &trans
-//    &trans  &kp LC(A) &kp LEFT &kp DOWN  &kp RIGHT&kp PG_DN   &kp MINUS &kp N4   &kp N5  &kp N6  &kp N0    &trans
-//    &trans  &kp LC(Z) &kp LC(X)&kp LC(C) &kp LC(V)&kp LS(TAB) &kp COMMA &kp N1   &kp N2  &kp N3  &kp DOT   &trans
-//                                         &kp DEL  &trans   &none  &none  &trans  &kp ESC
-//                         >;
-//                 };
+                num_nav_layer {
+// -----------------------------------------------------------------------------------------
+// |     | TAB | HOME |  UP | END | PGUP |   |  /  |  7  |  8  |  9  |  G-P |      |
+// |     | C-A | LEFT | DOWN| RGHT| PGDN |   |  -  |  4  |  5  |  6  |  0  |      |
+// |     | C-Z |  C-X |  C-C|  C-V| S-TAB|   |  ,  |  1  |  2  |  3  |  .  |      |
+//                             | DEL |     |     |     |     | ESC |
+                        bindings = <
+   &trans  &kp TAB   &kp HOME &kp UP    &kp END  &kp PG_UP   &kp FSLH  &kp N7   &kp N8  &kp N9  &kp LG(P) &trans
+   &trans  &kp LC(A) &kp LEFT &kp DOWN  &kp RIGHT&kp PG_DN   &kp MINUS &kp N4   &kp N5  &kp N6  &kp N0    &trans
+   &trans  &kp LC(Z) &kp LC(X)&kp LC(C) &kp LC(V)&kp LS(TAB) &kp COMMA &kp N1   &kp N2  &kp N3  &kp DOT   &trans
+                                        &kp DEL  &trans   &none  &none  &trans  &kp ESC
+                        >;
+                };
 
 
                 fun_pad_layer {
