@@ -79,19 +79,19 @@
                         >;
                 };
 
-                lafayette_layer {
-// -----------------------------------------------------------------------------------------
-// |     |  ^  |  <  |  >  |  $  |  %  |   |  @  |  &  |  *  |  '  |  `  |      |
-// |     |  {  |  (  |  )  |  }  |  =  |   |  \  |  +  |  -  |  /  |  "  |      |
-// |     |  ~  |  [  |  ]  |  _  |  #  |   |  |  |  !  |  ;  |  :  |  ?  |      |
-//                   | NUM | SPC |     |   |     | SPC | NUM |
-                        bindings = <
-   &trans  &kp CARET &kp LT   &kp GT   &kp DLLR &kp PRCNT   &kp AT   &kp AMPS  &kp ASTERISK &kp SQT  &kp GRAVE &trans
-   &trans  &kp LBRC  &kp LPAR &kp RPAR &kp RBRC &kp EQUAL   &kp BSLH &kp PLUS  &kp MINUS    &kp FSLH &kp DQT   &trans
-   &trans  &kp TILDE &kp LBKT &kp RBKT &kp UNDER &kp HASH   &kp PIPE &kp EXCL  &kp SEMI     &kp COLON &kp QUES &trans
-                                    &mo 2 &kp SPACE &none   &none &kp SPACE &mo 2
-                        >;
-                };
+//                 lafayette_layer {
+// // -----------------------------------------------------------------------------------------
+// // |     |  ^  |  <  |  >  |  $  |  %  |   |  @  |  &  |  *  |  '  |  `  |      |
+// // |     |  {  |  (  |  )  |  }  |  =  |   |  \  |  +  |  -  |  /  |  "  |      |
+// // |     |  ~  |  [  |  ]  |  _  |  #  |   |  |  |  !  |  ;  |  :  |  ?  |      |
+// //                   | NUM | SPC |     |   |     | SPC | NUM |
+//                         bindings = <
+//    &trans  &kp CARET &kp LT   &kp GT   &kp DLLR &kp PRCNT   &kp AT   &kp AMPS  &kp ASTERISK &kp SQT  &kp GRAVE &trans
+//    &trans  &kp LBRC  &kp LPAR &kp RPAR &kp RBRC &kp EQUAL   &kp BSLH &kp PLUS  &kp MINUS    &kp FSLH &kp DQT   &trans
+//    &trans  &kp TILDE &kp LBKT &kp RBKT &kp UNDER &kp HASH   &kp PIPE &kp EXCL  &kp SEMI     &kp COLON &kp QUES &trans
+//                                     &mo 2 &kp SPACE &none   &none &kp SPACE &mo 2
+//                         >;
+//                 };
 
                 num_row_layer {
 // -----------------------------------------------------------------------------------------
@@ -150,13 +150,13 @@
 //                         >;
 //                 };
 
-//                 mouse_pad_layer {
-//                         bindings = <
-//    &trans &none &none &none &none &none   &none          &mkp LCLK      &mkp MCLK    &mkp RCLK       &none &none
-//    &trans &none &none &none &none &none   &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none &none
-//    &trans &none &none &none &none &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none &none
-//                    &kp DEL &trans &none   &none &trans &kp ESC
-//                         >;
-//                 };
+                mouse_pad_layer {
+                        bindings = <
+  &trans &none &none &none &none &none   &none          &mkp LCLK      &mkp MCLK    &mkp RCLK       &none &none
+  &trans &none &none &none &none &none   &mmv MOVE_LEFT &mmv MOVE_DOWN &mmv MOVE_UP &mmv MOVE_RIGHT &none &none
+  &trans &none &none &none &none &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none &none
+                  &kp DEL &trans &none   &none &trans &kp ESC
+                        >;
+                };
         };
 };
