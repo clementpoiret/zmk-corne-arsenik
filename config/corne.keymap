@@ -107,15 +107,15 @@
 
                 vim_nav_layer {
 // -----------------------------------------------------------------------------------------
-// |     | NUMN|  C-T | BAK | FWD |     |   | HOME | PGDN | PGUP | END  |  G-P |      |
-// |     |  C-A|  C-S | S-TAB| TAB|     |   | LEFT | DOWN |  UP  | RIGHT| FUN  |      |
-// |     |  C-Z|  C-X | C-C | C-V |     |   | WHL← | WHL↓ | WHL↑ | WHL→ |      |      |
-//                             | DEL |     |     |     |     | ESC |
+// |      | NUM | C-T | BAK | FWD |     |   | HOME | PGDN | PGUP | END  | G-P  |      |
+// |      | C-A | C-S | S-T | TAB |     |   | LEFT | DOWN |  UP  | RGHT | FUN  |      |
+// |      | C-Z | C-X | C-C | C-V |     |   | M_L  | M_D  | M_U  | M_R  |      |      |
+//                    |     |     |     |   |      | DEL  | ESC  |
                         bindings = <
    &trans &mo 4     &kp LC(T) &kp C_AC_BACK &kp C_AC_FORWARD &none   &kp HOME       &kp PG_DN      &kp PG_UP    &kp END         &kp LG(P) &trans
    &trans &kp LC(A) &kp LC(S) &kp LS(TAB)   &kp TAB          &none   &kp LEFT       &kp DOWN       &kp UP       &kp RIGHT       &mo 5     &trans
    &trans &kp LC(Z) &kp LC(X) &kp LC(C)     &kp LC(V)        &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none     &trans
-                                              &kp DEL &trans &none   &none &trans &kp ESC
+                              &trans        &trans           &trans  &trans         &kp DEL        &kp ESC
                         >;
                 };
 
