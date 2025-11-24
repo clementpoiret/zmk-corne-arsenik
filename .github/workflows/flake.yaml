@@ -29,4 +29,3 @@ jobs:
         if: ${{ contains(fromJSON('["created", "updated"]'), steps.update-flake-lock.outputs.pull-request-operation) }}
         with:
           workflow: ci.yml
-          ref: refs/heads/update_flake_lock_action
