@@ -8,12 +8,12 @@ manifest:
   projects:
     - name: zmk
       remote: zmkfirmware
-      revision: v0.3.0
+      revision: edf5c0814fd3ea202e43aad2d68fd32e882a518c # main
       import: app/west.yml
 
     - name: zmk-unicode
       remote: urob
-      revision: v0.3.0
+      revision: 866602c99e4a5a0a61d2c1dcf6ecd0fd5e221c0a # main
 
   self:
     path: config
