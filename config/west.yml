@@ -13,7 +13,7 @@ manifest:
 
     - name: zmk-unicode
       remote: urob
-      revision: 866602c99e4a5a0a61d2c1dcf6ecd0fd5e221c0a # main
+      revision: 866602c99e4a5a0a61d2c1dcf6ecd0fd5e221c0a # v0.3.0
 
   self:
     path: config
