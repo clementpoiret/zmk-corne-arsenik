@@ -40,5 +40,5 @@ jobs:
       - uses: benc-uk/workflow-dispatch@v1
         if: ${{ contains(fromJSON('["created", "updated"]'), steps.create-pr.outputs.pull-request-operation) }}
         with:
-          workflow: ci.yml
+          workflow: ci.yaml
           ref: refs/heads/update_zmk_config_deps
