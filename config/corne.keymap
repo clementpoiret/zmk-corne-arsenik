@@ -116,7 +116,7 @@
 //                    | NAV | FUN | MSE |   | VIM | BSP  | ALT |
                         bindings = <
    &kp TAB   &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P           &kp BSPC
-   &kp ESC   &hml LGUI A &hml LALT S &hml LSHFT D &hml LCTRL F &kp G   &kp H &hmr RCTRL J &hmr RSHFT K &hmr RALT L &hmr RCTRL SEMI &kp ENTER
+   &kp ESC   &hml LGUI A &hml LALT S &hml LSHFT D &hml LCTRL F &kp G   &kp H &hmr RCTRL J &hmr RSHFT K &hmr RALT L &hmr RGUI SEMI  &kp ENTER
    &kp LSHFT &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH        &kp RSFT
                                      &tkl 3 ESC   &tkl 5 SPACE    &tkl 6 TAB    &tkr 4 RET   &tks 7 BACKSPACE &kp RALT
                         >;
