@@ -31,10 +31,13 @@
             ".defconfig"
             ".dts"
             ".dtsi"
+            ".h"
+            ".inc"
             ".json"
             ".keymap"
             ".overlay"
             ".shield"
+            ".yaml"
             ".yml"
             "_defconfig"
           ];
