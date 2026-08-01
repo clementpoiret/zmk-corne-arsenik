@@ -2,8 +2,9 @@
 
 ZMK firmware for a wireless Corne split keyboard built around nice!nano v2
 controllers and nice!view displays. The configuration provides a QWERTY base,
-home-row mods, navigation and number layers, mouse controls, media keys,
-Bluetooth profile management, and Linux Unicode input.
+translated by Linux XKB Ergo-L, eight home-row mods, a shared six-layer
+architecture, mouse controls, media keys, and guarded Bluetooth profile
+management.
 
 ## Hardware and firmware
 
@@ -11,7 +12,6 @@ Bluetooth profile management, and Linux Unicode input.
 - Shields: `corne_left` and `corne_right`
 - Displays: `nice_view_adapter` with `nice_view`
 - Firmware: ZMK `v0.3.0`
-- Extra module: `zmk-unicode` `v0.3.0`
 
 Display support, pointing behaviors, and deep sleep are enabled in
 [`config/corne.conf`](config/corne.conf). RGB underglow is available there as a
@@ -20,39 +20,56 @@ commented-out option.
 ## Keymap
 
 The full keymap is defined in
-[`config/corne.keymap`](config/corne.keymap). The base layer is:
+[`config/corne.keymap`](config/corne.keymap). Base keys emit positional QWERTY
+usages; Linux XKB Ergo-L produces the semantic characters:
 
 ```text
- TAB    Q    W    E    R    T   |   Y    U    I    O    P   BSPC
- ESC    A    S    D    F    G   |   H    J    K    L    ;   ENTER
-SHIFT   Z    X    C    V    B   |   N    M    ,    .    /   SHIFT
-              ESC  SPACE  TAB   | ENTER  BSPC  RALT
+ Q       W       E        R       T      | Y       U        I        O       P
+ A/GUI   S/Alt   D/Shift  F/Ctrl  G      | H       J/Ctrl   K/Shift  L/Alt   ;/GUI
+ Z       X       C        V       B      | N       M        ,        .       /
+             Esc/NAV  Space/FUNCTION  Tab/MOUSE | Enter/NUM_EDIT  Backspace  RAlt
 ```
 
 The home-row keys become modifiers when held:
 
 | Key | A | S | D | F | J | K | L | ; |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Hold | GUI | Alt | Shift | Ctrl | Ctrl | Shift | Alt | Ctrl |
+| Hold | GUI | Alt | Shift | Ctrl | Ctrl | Shift | Alt | GUI |
 
 Layer access is momentary: hold the listed thumb key to use a layer, then
-release it to return to the previous layer. The two symbol/number layers are
-nested as shown below.
+release it to return. `NUM_EDIT` is directly available from Enter. To reach
+`SYSTEM`, hold Space for `FUNCTION`, then hold the right outer thumb.
 
-| Layer | Hold | Purpose |
+| Layer | Access | Purpose |
 | --- | --- | --- |
-| 0 — Base | — | QWERTY typing and home-row mods |
-| 1 — Lafayette | A `SYM` thumb on the function layer | Programming symbols |
-| 2 — Number row | A `NUM` thumb on the Lafayette layer | Numbers and Unicode punctuation |
-| 3 — Vim navigation | `Esc` | Arrows, paging, browser navigation, shortcuts, and scrolling |
-| 4 — Number navigation | `Enter` | Numpad plus left-hand navigation and editing shortcuts |
-| 5 — Function pad | `Space` | Function keys, media controls, brightness, and modifiers |
-| 6 — Mouse pad | `Tab` | Pointer movement, scrolling, and mouse buttons |
-| 7 — Bluetooth | `Backspace` | Select, cycle, or clear Bluetooth profiles |
+| 0 — BASE | Default | Positional QWERTY, home-row mods, and thumb tap-holds |
+| 1 — NAV | Hold Escape | Navigation, browser controls, editing shortcuts, and scrolling |
+| 2 — NUM_EDIT | Hold Enter, or use `NUM_EDIT` from NAV | Digits, arithmetic, punctuation, navigation, and word editing |
+| 3 — FUNCTION | Hold Space, or use `FUNCTION` from NAV | Function keys, media controls, brightness, and modifiers |
+| 4 — MOUSE | Hold Tab | Pointer movement, scrolling, and mouse buttons |
+| 5 — SYSTEM | From FUNCTION, hold the right outer thumb | Bluetooth profile selection and clearing |
 
-`Esc`, `Space`, `Tab`, `Enter`, and `Backspace` still send their normal keycode
-when tapped. Hold-tap timing and opposite-hand activation rules are configured
-alongside the layers in the keymap.
+Programming symbols use native Ergo-L AltGr through the plain right-Alt thumb.
+The left outer thumb on `FUNCTION` provides sticky AltGr; its right outer thumb
+opens `SYSTEM`:
+
+```text
+StickyAltGr  Space  transparent | transparent  Backspace  SYSTEM
+```
+
+`NUM_EDIT` is shared with the Cheapino:
+
+```text
+ =       Home       Up          End         PgUp       | /   7   8   9   *
+ +       Left       Down        Right       PgDn       | -   4   5   6   0
+ ODK     Ctrl+Left  Ctrl+Bsp    Ctrl+Del    Ctrl+Right | ,   1   2   3   .
+                         Tab  Backspace  Enter         | held  x  x
+```
+
+`ODK` emits Ergo-L's host-native one-dead-key position. Follow it with digits
+1–5 for `„`, `“`, `”`, `¢`, and `‰` respectively. Backspace is plain and
+repeatable; Bluetooth is available only on `SYSTEM`. Existing HRM and remaining
+thumb hold-tap timing is unchanged in this phase.
 
 ## Build
 
@@ -105,7 +122,7 @@ The main files are:
 
 | Path | Purpose |
 | --- | --- |
-| `config/corne.keymap` | Layers, bindings, hold-taps, and Unicode behavior |
+| `config/corne.keymap` | Layers, bindings, hold-taps, and Ergo-L semantic behavior |
 | `config/corne.conf` | ZMK feature flags |
 | `config/west.yml` | Pinned ZMK and module revisions |
 | `flake.nix` | Reproducible firmware, flash, and update packages |

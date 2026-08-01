@@ -10,17 +10,16 @@
 #include <dt-bindings/zmk/pointing.h>
 #include "ergol.h"
 
+#define BASE 0
+#define NAV 1
+#define NUM_EDIT 2
+#define FUNCTION 3
+#define MOUSE 4
+#define SYSTEM 5
+
 / {
         chosen {
                 zmk,physical-layout = &foostan_corne_5col_layout;
-        };
-
-        macros {
-                odk: one_dead_key {
-                        compatible = "zmk,behavior-macro-one-param";
-                        #binding-cells = <1>;
-                        bindings = <&macro_tap &kp EL_ODK>, <&macro_param_1to1>, <&kp MACRO_PLACEHOLDER>;
-                };
         };
 
         behaviors {
@@ -101,22 +100,12 @@
                         >;
                         hold-trigger-on-release;
                 };
-                // currently only for the BSP/MO(7) key, to avoid switching to BT modes
-                tks: thumb_keys_safe {
-                        compatible = "zmk,behavior-hold-tap";
-                        #binding-cells = <2>;
-                        flavor = "tap-preferred";
-                        require-prior-idle-ms = <150>;
-                        tapping-term-ms = <200>;
-                        bindings = <&mo>, <&kp>;
-                        hold-trigger-on-release;
-                };
         };
 
         keymap {
                 compatible = "zmk,keymap";
 
-                default_layer {
+                base_layer {
 // -----------------------------------------------------------------------------------------
 // |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U   |  I  |  O  |  P  |
 // |  A  |  S  |  D  |  F  |  G  |   |  H  |  J   |  K  |  L  |  ;  |
@@ -126,81 +115,53 @@
    &kp Q       &kp W       &kp E        &kp R        &kp T   &kp Y &kp U        &kp I        &kp O       &kp P
    &hml LGUI A &hml LALT S &hml LSHFT D &hml LCTRL F &kp G   &kp H &hmr RCTRL J &hmr RSHFT K &hmr RALT L &hmr RGUI SEMI
    &kp Z       &kp X       &kp C        &kp V        &kp B   &kp N &kp M        &kp COMMA    &kp DOT     &kp FSLH
-                               &tkl 3 ESC   &tkl 5 SPACE   &tkl 6 TAB   &tkr 4 RET   &tks 7 BACKSPACE   &kp RALT
+                               &tkl NAV ESC   &tkl FUNCTION SPACE   &tkl MOUSE TAB   &tkr NUM_EDIT RET   &kp BACKSPACE   &kp RALT
                         >;
                 };
 
-                lafayette_layer {
-// -----------------------------------------------------------------------------------------
-// |  ^  |  <  |  >  |  $  |  %  |   |  @  |  &  |  *  |  '  |  `  |
-// |  {  |  (  |  )  |  }  |  =  |   |  \  |  +  |  -  |  /  |  "  |
-// |  ~  |  [  |  ]  |  _  |  #  |   |  |  |  !  |  ;  |  :  |  ?  |
-//             | NUM | SPC |     |   |     | BSP | NUM |
-                        bindings = <
-   &kp EL_CIRC &kp EL_LT   &kp EL_GT   &kp EL_DLR  &kp EL_PERC   &kp EL_AT   &kp EL_AMPR &kp EL_ASTR &kp EL_QUOT &kp EL_GRV
-   &kp EL_LCBR &kp EL_LPRN &kp EL_RPRN &kp EL_RCBR &kp EL_EQL    &kp EL_BSLS &kp EL_PLUS &kp EL_MINS &kp EL_SLSH &kp EL_DQUO
-   &kp EL_TILD &kp EL_LBRC &kp EL_RBRC &kp EL_UNDS &kp EL_HASH   &kp EL_PIPE &kp EL_EXLM &kp EL_SCLN &kp EL_COLN &kp EL_QUES
-                                  &mo 2   &kp SPACE   &trans   &trans   &kp BACKSPACE   &mo 2
-                        >;
-                };
-
-                num_row_layer {
-// -----------------------------------------------------------------------------------------
-// |  !  |  @  |  #  |  $  |  %  |   |  ^  |  &  |  *  |  (  |  )  |
-// |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  |
-// |  „  |  “  |  ”  |  ¢  |  ‰  |   |     |  -  |  ,  |  .  |  /  |
-//             | SYM | SPC |     |   |     | BSP | SYM |
-                        bindings = <
-   &kp EL_EXLM &kp EL_AT &kp EL_HASH &kp EL_DLR &kp EL_PERC   &kp EL_CIRC &kp EL_AMPR &kp EL_ASTR &kp EL_LPRN &kp EL_RPRN
-   &kp EL_1    &kp EL_2  &kp EL_3    &kp EL_4   &kp EL_5      &kp EL_6    &kp EL_7    &kp EL_8    &kp EL_9    &kp EL_0
-   &odk EL_1   &odk EL_2 &odk EL_3   &odk EL_4  &odk EL_5     &none       &kp EL_MINS  &kp EL_COMM &kp EL_DOT  &kp EL_SLSH
-                              &mo 1   &kp SPACE   &trans   &trans   &kp BACKSPACE   &mo 1
-                        >;
-                };
-
-                vim_nav_layer {
+                nav_layer {
 // -----------------------------------------------------------------------------------------
 // | NUM | C-T | BAK | FWD |     |   | HOME | PGDN | PGUP | END  | G-P  |
 // | C-A | C-S | S-T | TAB |     |   | LEFT | DOWN |  UP  | RGHT | FUN  |
 // | C-Z | C-X | C-C | C-V |     |   | M_L  | M_D  | M_U  | M_R  |      |
 //             |     |     |     |   |      | DEL  | ESC  |
                         bindings = <
-   &mo 4        &kp LC(EL_T) &kp C_AC_BACK &kp C_AC_FORWARD &none   &kp HOME       &kp PG_DN      &kp PG_UP    &kp END         &kp LG(EL_P)
-   &kp LC(EL_A) &kp LC(EL_S) &kp LS(TAB)   &kp TAB          &none   &kp LEFT       &kp DOWN       &kp UP       &kp RIGHT       &mo 5
+   &mo NUM_EDIT &kp LC(EL_T) &kp C_AC_BACK &kp C_AC_FORWARD &none   &kp HOME       &kp PG_DN      &kp PG_UP    &kp END         &kp LG(EL_P)
+   &kp LC(EL_A) &kp LC(EL_S) &kp LS(TAB)   &kp TAB          &none   &kp LEFT       &kp DOWN       &kp UP       &kp RIGHT       &mo FUNCTION
    &kp LC(EL_Z) &kp LC(EL_X) &kp LC(EL_C)  &kp LC(EL_V)     &none   &msc SCRL_LEFT &msc SCRL_DOWN &msc SCRL_UP &msc SCRL_RIGHT &none
                                       &trans   &trans   &trans   &trans   &kp DEL   &kp ESC
                         >;
                 };
 
-                num_nav_layer {
+                num_edit_layer {
 // -----------------------------------------------------------------------------------------
-// | TAB | HOME|  UP | END | PGUP|   |  /  |  7  |  8  |  9  | G-P  |
-// | C-A | LEFT| DOWN| RGHT| PGDN|   |  -  |  4  |  5  |  6  |  0   |
-// | C-Z | C-X | C-C | C-V | S-T |   |  ,  |  1  |  2  |  3  |  .   |
-//             |     |     |     |   |     | DEL | ESC |
+// |  =  | HOME |  UP  | END | PGUP |   | / | 7 | 8 | 9 | * |
+// |  +  | LEFT | DOWN | RGHT| PGDN |   | - | 4 | 5 | 6 | 0 |
+// | ODK | C-L  | C-BSP| C-DEL| C-R |   | , | 1 | 2 | 3 | . |
+//             | TAB | BSP | RET |   | NUM |   |   |
                         bindings = <
-   &kp TAB      &kp HOME &kp UP       &kp END      &kp PG_UP    &kp EL_SLSH &kp EL_7 &kp EL_8 &kp EL_9 &kp LG(EL_P)
-   &kp LC(EL_A) &kp LEFT &kp DOWN     &kp RIGHT    &kp PG_DN    &kp EL_MINS &kp EL_4 &kp EL_5 &kp EL_6 &kp EL_0
-   &kp LC(EL_Z) &kp LC(EL_X) &kp LC(EL_C) &kp LC(EL_V) &kp LS(TAB) &kp EL_COMM &kp EL_1 &kp EL_2 &kp EL_3 &kp EL_DOT
-                                          &trans   &trans   &trans   &trans   &kp DEL   &kp ESC
+   &kp EL_EQL  &kp HOME     &kp UP            &kp END       &kp PG_UP      &kp EL_SLSH &kp N7 &kp N8 &kp N9 &kp EL_ASTR
+   &kp EL_PLUS &kp LEFT     &kp DOWN          &kp RIGHT     &kp PG_DN      &kp EL_MINS &kp N4 &kp N5 &kp N6 &kp N0
+   &kp EL_ODK  &kp LC(LEFT) &kp LC(BACKSPACE) &kp LC(DEL)   &kp LC(RIGHT)  &kp EL_COMM &kp N1 &kp N2 &kp N3 &kp EL_DOT
+                                        &kp TAB   &kp BACKSPACE   &kp RET   &trans   &none   &none
                         >;
                 };
 
-                fun_pad_layer {
+                function_layer {
 // -----------------------------------------------------------------------------------------
 // | F1  | F2  | F3  | F4  |     |   | PSCRN| BRID| BRIU|VMUTE| VOLU|
 // | F5  | F6  | F7  | F8  |     |   |      | CTRL| SHFT| ALT | GUI |
 // | F9  | F10 | F11 | F12 |     |   |      | PREV| PP  | NEXT|     |
-//             | SYM | SPC |     |   |      | BSP | SYM |
+//             | S-ALT | SPC |   |   |      | BSP | SYS |
                         bindings = <
    &kp F1 &kp F2  &kp F3  &kp F4  &none   &kp PSCRN &kp C_BRI_DN &kp C_BRI_UP &hrm C_MUTE C_VOL_DN &kp C_VOL_UP
    &kp F5 &kp F6  &kp F7  &kp F8  &none   &none     &kp LCTRL    &kp LSHFT    &kp LALT     &kp LGUI
    &kp F9 &kp F10 &kp F11 &kp F12 &none   &none     &kp C_PREV   &kp C_PP     &kp C_NEXT   &none
-                               &mo 1   &kp SPACE   &trans   &trans   &kp BACKSPACE   &mo 1
+                               &sk RALT   &kp SPACE   &trans   &trans   &kp BACKSPACE   &mo SYSTEM
                         >;
                 };
 
-                mouse_pad_layer {
+                mouse_layer {
 // -----------------------------------------------------------------------------------------
 // |     |     |     |     |     |   |     | LCLK| MCLK| RCLK|     |
 // |     |     |     |     |     |   | M_L | M_D | M_U | M_R |     |
@@ -214,7 +175,7 @@
                         >;
                 };
 
-                bt_layer {
+                system_layer {
 // -----------------------------------------------------------------------------------------
 // | BT1 | BT2 | BT3 | BT4 | BT5 |   |     |     |     |     |     |
 // |     |     |     |     |     |   |     | PRV | NXT |     |     |
@@ -224,7 +185,7 @@
    &bt BT_SEL 0 &bt BT_SEL 1   &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4   &none &none      &none      &none &none
    &none        &none          &none        &none        &none          &none &bt BT_PRV &bt BT_NXT &none &none
    &bt BT_CLR   &bt BT_CLR_ALL &none        &none        &none          &none &none      &none      &none &none
-                                             &trans   &trans   &trans   &trans   &trans   &trans
+                                             &none   &none   &none   &none   &none   &none
                         >;
                 };
         };
