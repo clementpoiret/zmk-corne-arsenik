@@ -68,8 +68,25 @@ StickyAltGr  Space  transparent | transparent  Backspace  SYSTEM
 
 `ODK` emits Ergo-L's host-native one-dead-key position. Follow it with digits
 1–5 for `„`, `“`, `”`, `¢`, and `‰` respectively. Backspace is plain and
-repeatable; Bluetooth is available only on `SYSTEM`. Existing HRM and remaining
-thumb hold-tap timing is unchanged in this phase.
+repeatable; Bluetooth is available only on `SYSTEM`.
+
+## Tap-hold behavior
+
+The home-row and thumb policies are intentionally separate:
+
+| Key class | Decision policy | Tapping term | Quick tap |
+| --- | --- | --- | --- |
+| Eight home-row mods | Balanced, 150 ms prior-idle, opposite-hand triggers | 200 ms | 175 ms |
+| Escape/NAV, Tab/MOUSE, Enter/NUM_EDIT | Hold-preferred, either-hand targets | 150 ms | Disabled |
+| Space/FUNCTION | Balanced, either-hand targets | 150 ms | 175 ms |
+| Volume Down/Mute | Tap-preferred, no typing filters | 200 ms | Disabled |
+
+Prior-idle and positional hand filtering apply only to the HRMs. The three
+decisive layer thumbs activate their layer as soon as another key is pressed,
+even immediately after typing. Space/Function waits for a nested key or its
+tapping term, which keeps ordinary Space rolls tap-biased. Tap-then-hold repeats
+Space, while tap-then-hold on Escape, Tab, or Enter activates the associated
+layer. Backspace remains a plain key with normal hold-to-repeat behavior.
 
 ## Build
 
