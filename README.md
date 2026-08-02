@@ -8,6 +8,11 @@ private overlays provide temporary slow and fast pointer speeds without
 changing the public layer numbering shared with QMK. The maintenance layer
 also provides explicit USB/BLE routing and per-half recovery controls.
 
+The firmware-independent daily behavior is defined in the canonical
+[shared behavior specification](docs/shared-behavior.md), with its current
+[parity acceptance record](docs/parity-acceptance.md). This README keeps the
+Corne-specific build, transport, flashing, and recovery instructions.
+
 ## Hardware and firmware
 
 - Board: `nice_nano_v2`
@@ -23,19 +28,23 @@ commented-out option.
 
 The full keymap is defined in
 [`config/corne.keymap`](config/corne.keymap). Base keys emit positional QWERTY
-usages; Linux XKB Ergo-L produces the semantic characters:
+usages; Linux XKB Ergo-L produces the following semantic characters:
 
 ```text
- Q       W       E        R       T      | Y       U        I        O       P
- A/GUI   S/Alt   D/Shift  F/Ctrl  G      | H       J/Ctrl   K/Shift  L/Alt   ;/GUI
- Z       X       C        V       B      | N       M        ,        .       /
+ Q       C       O        P       W      | J       M        D        ODK     Y
+ A/GUI   S/Alt   E/Shift  N/Ctrl  F      | L       R/Ctrl   T/Shift  I/Alt   U/GUI
+ Z       X       -        V       B      | .       H        G        ,       K
              Esc/NAV  Space/FUNCTION  Tab/MOUSE | Enter/NUM_EDIT  Backspace  RAlt
 ```
 
-The home-row keys become modifiers when held:
+The raw positional QWERTY usages are retained in the keymap and documented in
+the shared specification's debugging appendix.
 
-| Key | A | S | D | F | J | K | L | ; |
+The home-row positions become modifiers when held:
+
+| Raw position | A | S | D | F | J | K | L | ; |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Ergo-L tap | A | S | E | N | R | T | I | U |
 | Hold | GUI | Alt | Shift | Ctrl | Ctrl | Shift | Alt | GUI |
 
 The four work layers are available momentarily from their Base thumb. To reach
@@ -60,58 +69,10 @@ key or expires after one second:
 StickyAltGr  Space  x | StickyShift  Backspace  SYSTEM
 ```
 
-### NAV
-
-```text
- Ctrl+Left        Ctrl+Right        Ctrl+Bsp   Ctrl+Del   Repeat | BrowserBack  Home           PgDn     PgUp  End
- Ctrl+A           Ctrl+Z            Redo       Ctrl+C     Ctrl+V | BrowserFwd   Left           Down     Up    Right
- Ctrl+Shift+Left  Ctrl+Shift+Right  Shift+Home Shift+End Ctrl+X | x             Ctrl+Shift+Tab Ctrl+Tab x     x
-                                      ___  ___  ___       | ___  Delete  Escape
-```
-
-### NUM_EDIT
-
-`NUM_EDIT` is shared with the Cheapino:
-
-```text
- =       Home       Up          End         PgUp       | /   7   8   9   *
- +       Left       Down        Right       PgDn       | -   4   5   6   0
- ODK     Ctrl+Left  Ctrl+Bsp    Ctrl+Del    Ctrl+Right | ,   1   2   3   .
-                         Tab  Backspace  Enter         | NumEdit/Unlock  x  x
-```
-
-`ODK` emits Ergo-L's host-native one-dead-key position. Follow it with digits
-1–5 for `„`, `“`, `”`, `¢`, and `‰` respectively. Backspace is plain and
-repeatable.
-
-### FUNCTION
-
-```text
- F1  F2   F3   F4   x   | PrintScreen  Brightness-  Brightness+  Mute       ASCII Space
- F5  F6   F7   F8   x   | LeftCtrl     LeftShift    LeftAlt      LeftGUI    x
- F9  F10  F11  F12  x   | Previous     Play/Pause   Next         Volume-    Volume+
-             StickyAltGr  Space  x      | StickyShift  Backspace  SYSTEM
-```
-
-`ASCII Space` sends a literal space while temporarily masking Shift and AltGr.
-It is useful when a sticky modifier is active but the intended output is an
-ordinary space.
-
-### MOUSE
-
-```text
- Slow  Fast  x  x  x   | Button4  WhL   WhD   WhU   WhR
- Ctrl  Shift Alt GUI x | Button5  Left  Down  Up    Right
- Button1 Button2 Button3 x x | x   x     x     x     x
-              Base  Space  Mouse/Unlock | x  Backspace  Escape
-```
-
-Without a speed key, ZMK's normal pointer settings apply. Hold `Slow` or `Fast`
-before a movement or wheel key to activate a transparent private overlay. The
-slow overlay uses movement/scroll values of 200/4, and the fast overlay uses
-1200/20; normal mode retains ZMK's configured defaults. Buttons 4 and 5 provide
-the usual browser back/forward actions. `Base` exits a momentary or locked
-mouse layer, and `Mouse/Unlock` releases a mouse-layer toggle.
+Exact `NAV`, `NUM_EDIT`, `FUNCTION`, and `MOUSE` diagrams and their acceptance
+criteria are maintained once in the shared behavior specification. On the
+Corne, Slow and Fast temporarily activate transparent private overlays with
+movement/scroll values of 200/4 and 1200/20; normal mode retains ZMK defaults.
 
 ### SYSTEM
 
@@ -135,22 +96,13 @@ act on the physical half where they are pressed.
 The nice!view display uses a name for every public and private layer: Base,
 Nav, Num/Edit, Function, Mouse, System, Mouse Slow, and Mouse Fast.
 
-## Tap-hold behavior
+## Tap-hold implementation
 
-The home-row and thumb policies are intentionally separate:
-
-| Key class | Decision policy | Tapping term | Quick tap |
-| --- | --- | --- | --- |
-| Eight home-row mods | Balanced, 150 ms prior-idle, opposite-hand triggers | 200 ms | 175 ms |
-| Escape/NAV, Tab/MOUSE, Enter/NUM_EDIT | Hold-preferred, either-hand targets | 150 ms | Disabled |
-| Space/FUNCTION | Balanced, either-hand targets | 150 ms | 175 ms |
-
-Prior-idle and positional hand filtering apply only to the HRMs. The three
-decisive layer thumbs activate their layer as soon as another key is pressed,
-even immediately after typing. Space/Function waits for a nested key or its
-tapping term, which keeps ordinary Space rolls tap-biased. Tap-then-hold repeats
-Space, while tap-then-hold on Escape, Tab, or Enter activates the associated
-layer. Backspace remains a plain key with normal hold-to-repeat behavior.
+The shared specification owns the observable timing contract. In ZMK, separate
+`hml`/`hmr`, `tl`, and `sf` behaviors ensure prior-idle and positional hand
+filtering apply only to HRMs. The three decisive layer thumbs are
+hold-preferred, Space/Function is balanced with quick tap, and Backspace is a
+plain repeatable key.
 
 ## Build
 
