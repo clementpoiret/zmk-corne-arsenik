@@ -5,7 +5,8 @@ controllers and nice!view displays. The configuration provides a QWERTY base,
 translated by Linux XKB Ergo-L, eight home-row mods, six shared public layers,
 mouse controls, media keys, and guarded Bluetooth profile management. Two
 private overlays provide temporary slow and fast pointer speeds without
-changing the public layer numbering shared with QMK.
+changing the public layer numbering shared with QMK. The maintenance layer
+also provides explicit USB/BLE routing and per-half recovery controls.
 
 ## Hardware and firmware
 
@@ -49,7 +50,7 @@ locks have no timeout; tap the locked layer's access thumb to return to Base.
 | 2 — NUM_EDIT | Hold Enter, or toggle from `SYSTEM` | Digits, arithmetic, punctuation, navigation, and word editing |
 | 3 — FUNCTION | Hold Space | Function keys, media, brightness, sticky modifiers, and ASCII Space |
 | 4 — MOUSE | Hold Tab, or toggle from `SYSTEM` | Pointer movement, scrolling, buttons, and speed selection |
-| 5 — SYSTEM | From FUNCTION, hold the right outer thumb | Bluetooth, Caps Lock, Compose, and guarded layer toggles |
+| 5 — SYSTEM | From FUNCTION, hold the right outer thumb | Output routing, Bluetooth, recovery, Caps Lock, Compose, and guarded layer toggles |
 
 Programming symbols use native Ergo-L AltGr through the plain right-Alt thumb.
 `FUNCTION` provides sticky AltGr and Shift; each remains active for the next
@@ -115,17 +116,24 @@ mouse layer, and `Mouse/Unlock` releases a mouse-layer toggle.
 ### SYSTEM
 
 ```text
- BT1  BT2  BT3  BT4  BT5 | CapsLock  Compose  x       x       x
- x    x    x    x    x   | NumEditLock  BT Prev  BT Next x       MouseLock
- BT Clear  BT Clear All  x  x  x | x  x  x  x  x
-                 x  x  x | x  x  x
+ BT1    BT2    BT3     BT4  BT5 | USB   BLE   Toggle  CapsLock  Compose
+ Clear  x      x       x    x   | Num   Prev  Next    x         Mouse
+ ALL+   ResetL BootL   x    x   | x     x     BootR   ResetR    +ALL
+                    x  x  x      | x  x  x
 ```
 
 `Compose` sends the Application/Menu key. On Linux XKB, configure
 `compose:menu` so that key starts a Compose sequence. `NumEditLock` and
 `MouseLock` toggle their layers with no idle timeout; use the access thumb
-shown on the locked layer to unlock it. Bluetooth profile selection, cycling,
-and clearing remain available only on `SYSTEM`.
+shown on the locked layer to unlock it. `USB`, `BLE`, and `Toggle` select the
+output explicitly, including charging over USB while continuing to type over
+BLE. `Clear` forgets only the current Bluetooth profile. To clear every
+profile, press the two outer `ALL` keys together within 100 ms; remove the old
+host bond and pair the keyboard again afterward. The reset and bootloader keys
+act on the physical half where they are pressed.
+
+The nice!view display uses a name for every public and private layer: Base,
+Nav, Num/Edit, Function, Mouse, System, Mouse Slow, and Mouse Fast.
 
 ## Tap-hold behavior
 
@@ -146,10 +154,12 @@ layer. Backspace remains a plain key with normal hold-to-repeat behavior.
 
 ## Build
 
-Install [Nix](https://nixos.org/download/) with flakes enabled, then run:
+Nix is the sole build definition for this repository; there is intentionally
+no separate `build.yaml` matrix. Install [Nix](https://nixos.org/download/)
+with flakes enabled, then build the normal firmware:
 
 ```sh
-nix build
+nix build .#firmware
 ```
 
 The build produces both halves under `result/`:
@@ -158,6 +168,16 @@ The build produces both halves under `result/`:
 result/zmk_left.uf2
 result/zmk_right.uf2
 ```
+
+Build the destructive settings-reset images separately:
+
+```sh
+nix build .#settings-reset --out-link result-settings-reset
+```
+
+This produces `result-settings-reset/zmk_left.uf2` and
+`result-settings-reset/zmk_right.uf2`. The normal firmware remains the flake's
+default package.
 
 To run the same evaluation check used by CI:
 
@@ -183,6 +203,30 @@ To flash manually:
 
 Make sure the firmware filename matches the half being flashed.
 
+### Settings-reset recovery
+
+Settings-reset firmware erases stored ZMK settings, including Bluetooth bonds.
+Use it only when deliberate recovery is required:
+
+1. Build with `nix build .#settings-reset --out-link result-settings-reset`,
+   or start its guided flasher with `nix run .#flash-settings-reset`.
+2. Flash the matching settings-reset image to both halves.
+3. Flash the normal firmware back to both halves with `nix run .#flash` or the
+   manual procedure above.
+4. Remove the keyboard's old bond from the host.
+5. Pair the keyboard again.
+
+The `BootL`/`BootR` and `ResetL`/`ResetR` controls on `SYSTEM` provide an
+assembled-keyboard recovery path without relying only on a physical reset
+double-tap. Flashing is never performed automatically by a build.
+
+### Sleep and wake validation
+
+Deep sleep is enabled, but its thresholds are intentionally unchanged until
+the hardware behavior is measured. Before tuning them, record the first key
+after idle and deep sleep, reconnection delay, battery life, and any difference
+between left- and right-half wake behavior.
+
 ## Development
 
 Enter the supplied development shell with:
@@ -199,10 +243,9 @@ The main files are:
 | `config/corne.conf` | ZMK feature flags |
 | `config/west.yml` | Pinned ZMK and module revisions |
 | `flake.nix` | Reproducible firmware, flash, and update packages |
-| `build.yaml` | Left/right build matrix for the standard ZMK workflow |
 
 After changing the keymap or configuration, run `nix flake check` followed by
-`nix build`.
+`nix build .#firmware` and `nix build .#settings-reset`.
 
 To update the pinned West dependencies and their Nix hash:
 
@@ -212,5 +255,6 @@ nix run .#update
 
 Review the resulting changes to `config/west.yml` and `flake.nix`, then rebuild
 both halves. GitHub Actions also checks pull requests and pushes to `main`,
-uploads the firmware as the `zmk_firmware` artifact, and opens scheduled
-dependency-update pull requests.
+uploads normal and recovery images as the `zmk_firmware` and
+`zmk_settings_reset` artifacts, and opens scheduled dependency-update pull
+requests.

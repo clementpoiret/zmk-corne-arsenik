@@ -7,20 +7,32 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
-      - uses: DeterminateSystems/nix-installer-action@v11
+      - uses: DeterminateSystems/nix-installer-action@7993355175c2765e5733dae74f3e0786fe0e5c4f # v12
 
       - run: nix -vL --show-trace flake check
 
-      - run: nix -vL --show-trace build
+      - run: nix -vL --show-trace build --out-link result-firmware .#firmware
 
-      - uses: actions/upload-artifact@v4
+      - run: nix -vL --show-trace build --out-link result-settings-reset .#settings-reset
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: zmk_firmware
-          path: result
+          path: result-firmware/*.uf2
+          if-no-files-found: error
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: zmk_settings_reset
+          path: result-settings-reset/*.uf2
+          if-no-files-found: error

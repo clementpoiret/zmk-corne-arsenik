@@ -14,18 +14,19 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
-      - uses: DeterminateSystems/nix-installer-action@v11
+      - uses: DeterminateSystems/nix-installer-action@7993355175c2765e5733dae74f3e0786fe0e5c4f # v12
 
       - id: update-flake-lock
-        uses: DeterminateSystems/update-flake-lock@v21
+        uses: DeterminateSystems/update-flake-lock@a3ccb8f59719c48d6423e97744560221bcf7a3fa # v21
         with:
-          commit-msg: 'flake: update inputs'
-          pr-title: 'flake: update inputs'
+          commit-msg: 'chore(deps): update flake inputs'
+          pr-title: 'chore(deps): update flake inputs'
           pr-labels: 'dependencies'
 
-      - uses: benc-uk/workflow-dispatch@v1
+      - uses: benc-uk/workflow-dispatch@31e2b3319479a63f0ab15bf800eff9e913504e26 # v1.3.2
         if: ${{ contains(fromJSON('["created", "updated"]'), steps.update-flake-lock.outputs.pull-request-operation) }}
         with:
           workflow: ci.yaml
+          ref: refs/heads/update_flake_lock_action

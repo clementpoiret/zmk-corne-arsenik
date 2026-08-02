@@ -18,26 +18,26 @@ jobs:
       contents: write
       pull-requests: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
 
-      - uses: DeterminateSystems/nix-installer-action@v12
+      - uses: DeterminateSystems/nix-installer-action@7993355175c2765e5733dae74f3e0786fe0e5c4f # v12
 
       - run: nix -vL run --show-trace .#update
 
       - id: create-pr
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
         with:
           branch: update_zmk_config_deps
           delete-branch: true
           committer: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
           author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
-          commit-message: 'config,nix: update deps'
-          title: 'config,nix: update deps'
+          commit-message: 'chore(deps): update ZMK dependencies'
+          title: 'chore(deps): update ZMK dependencies'
           labels: 'dependencies'
           body: |
             Automated bump of ZMK dependencies
 
-      - uses: benc-uk/workflow-dispatch@v1
+      - uses: benc-uk/workflow-dispatch@31e2b3319479a63f0ab15bf800eff9e913504e26 # v1.3.2
         if: ${{ contains(fromJSON('["created", "updated"]'), steps.create-pr.outputs.pull-request-operation) }}
         with:
           workflow: ci.yaml
